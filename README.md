@@ -2,13 +2,19 @@
 > 内功修炼和自我修养笔记
 
 
-### 【Angularjs1.X进阶笔记】系列
+### 【Vue】系列
 ___
 
-> `Angularjs1.X`基本用法。
+> `Vue`基本用法。
 
-- [Angularjs1.X进阶笔记（1）两种不同的双向数据绑定]()   
-- [Angularjs1.X进阶笔记（2）自定义指令中的数据绑定]() 
-- [Angularjs1.X进阶笔记（3）如何重构controller]()   
+- [Vue文档 vue-cli配置](https://cli.vuejs.org/zh/config/)
+- [Vue文档 生态系统vue-router](https://router.vuejs.org)
+- [Vue文档 生态系统vuex](https://vuex.vuejs.org)
+- [Vue文档 生态系统vue-loader](https://vue-loader.vuejs.org)
+- [Vue文档 生态系统vue-devtools](https://github.com/vuejs/vue-devtools#vue-devtools)
+- [Vue文档 生态系统awesome-vue](https://github.com/vuejs/awesome-vue)
+- [Vue文档 核心内容](https://vuejs.org)
+- [Vue文档 论坛](https://forum.vuejs.org)
+
 
 
