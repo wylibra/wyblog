@@ -1,6 +1,14 @@
 # blog
 > 内功修炼和自我修养笔记
 
+### 参考
+___
+
+> `vue-element-admin`学习参考
+
+[vue-element-admin 学习文档](https://juejin.im/post/6844903476661583880)
+[vue-element-admin github地址](https://github.com/PanJiaChen/vue-element-admin/)
+[vue-element-admin demo演示](https://panjiachen.github.io/vue-element-admin/#/documentation/index)
 
 ### 【Vue】系列
 ___
@@ -16,5 +24,25 @@ ___
 - [Vue文档 核心内容](https://vuejs.org)
 - [Vue文档 论坛](https://forum.vuejs.org)
 
+
+## 项目设置
+```
+npm install
+```
+
+### 项目启动
+```
+npm run serve
+```
+
+### 项目打包
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
 
 

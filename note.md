@@ -30,24 +30,3 @@ ___
 [vue.config.js 配置](https://cli.vuejs.org/zh/config/#vue-config-js)
 
 
-
-## 项目设置
-```
-npm install
-```
-
-### 项目启动
-```
-npm run serve
-```
-
-### 项目打包
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-[配置参考](https://cli.vuejs.org/config/)
