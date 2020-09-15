@@ -1,3 +1,6 @@
+const title = "Lusia"
+const port = process.env.port || process.env.npm_config_port || 8082 // dev port
+
 module.exports = {
   // 部署应用包时的基本路径
   publicPath: "./",
@@ -6,19 +9,24 @@ module.exports = {
   // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录
   assetsDir: "static",
   // 是否在保存的时候使用 `eslint-loader` 进行检查。 有效的值：`ture` | `false` | `"error"`
-  lintOnSave: false,
+  lintOnSave: process.env.NODE_ENV === 'development',
   // 是否使用包含运行时编译器的 Vue 构建版本
   runtimeCompiler: true,
   // 生产环境的 source map
   productionSourceMap: false,
 
-  // Webpack相关配置
+  // Webpack相关配置 https://cli.vuejs.org/zh/guide/webpack.html
   configureWebpack: config => {
   },
   chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].title = title
+        return args
+      })
   },
-
-  // Css相关配置
+  // Css相关配置  https://cli.vuejs.org/zh/guide/css.html
   css: {
     // 将组件中的 CSS 提取至一个独立的 CSS 文件中
     extract: false,
@@ -55,7 +63,7 @@ module.exports = {
     // 自动打开浏览器
     open: true,
     host: '0.0.0.0',
-    port: 8080,
+    port: port,
     overlay: {
       warnings: false,
       errors: true
