@@ -25,9 +25,9 @@ module.exports = {
     // 为 CSS 开启 source map
     sourceMap: false,
     loaderOptions: {
-      // less: {
-      //   javascriptEnabled: true
-      // },
+      less: {
+        javascriptEnabled: true
+      },
       // css: {
       //   // 这里的选项会传递给 css-loader
       // },
