@@ -1,15 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import Layout from '@/layout'
+
 Vue.use(Router)
 
 const commonRoutes = [
   {
-    path: '/iview-tree',
-    name: 'iviewTree',
-    component: () => import('@/views/iview-tree/index.vue')
+    path: '/',
+    component: Layout,
+    redirect: '/iview-tree',
+    children: [
+      {
+        path: 'iview-tree',
+        component: () => import('@/views/iview-tree/index'),
+        name: 'iviewTree',
+        meta: { title: 'iviewTree', icon: 'dashboard', affix: true }
+      }
+    ]
   },
-  { path: '/', redirect: '/iview-tree' },
 ]
 
 // 需要通过后台数据来生成的组件
