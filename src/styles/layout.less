@@ -1,0 +1,46 @@
+#app {
+  // 页面布局
+  .app-wrapper {
+    .clearfix;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    // 左侧sidebar
+    .sidebar-container {
+      transition: width 0.28s;
+      width: @sideBarWidth !important;
+      background-color: @menuBg;
+      height: 100%;
+      position: fixed;
+      font-size: 0px;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1001;
+      overflow: hidden;
+    }
+    // 右侧main
+    .main-container {
+      min-height: 100%;
+      transition: margin-left .28s;
+      margin-left: @sideBarWidth;
+      position: relative;
+      // 顶部navbar
+      .navbar-container {
+        height: 50px;
+        overflow: hidden;
+        position: relative;
+        background: #fff;
+        box-shadow: 0 1px 4px rgba(0,21,41,.08);
+      }
+      // 内容区域
+      .app-main {
+        /* 50= navbar  50  */
+        min-height: calc(100vh - 50px);
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+    }
+  }
+}

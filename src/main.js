@@ -4,6 +4,7 @@ import store from './store'
 import router from './router'
 import ViewUI from 'view-design'
 import './index.less'
+import '@/styles/index.less' // global css
 
 import _ from 'lodash'
 import md5 from 'js-md5';

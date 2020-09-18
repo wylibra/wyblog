@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-wrapper">
     <sidebar class="sidebar-container" />
     <div class="main-container">
       <navbar class="navbar-container" />
@@ -20,6 +20,3 @@ export default {
   methods: {},
 };
 </script>
-
-<style lang="less">
-</style>
