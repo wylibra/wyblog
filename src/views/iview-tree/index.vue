@@ -1,5 +1,5 @@
 <template>
-  <div class="tree-container">
+  <div class="app-container">
     <Tree ref="tree" :data="organizationData" :render="renderContent" class="demo-tree-render"></Tree>
   </div>
 </template>
