@@ -5,7 +5,21 @@ import Layout from '@/layout'
 
 Vue.use(Router)
 
-const commonRoutes = [
+/**
+ * commonRoutes
+ * 没有权限要求的基页 所有角色可以访问
+ */
+export const commonRoutes = [
+  {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/error-page/404'),
+    hidden: true
+  },
   {
     path: '/',
     component: Layout,
@@ -21,8 +35,13 @@ const commonRoutes = [
   },
 ]
 
-// 需要通过后台数据来生成的组件
+/**
+ * asyncRoutes
+ * 需要根据用户角色动态加载的路由
+ */
+// 
 export const asyncRoutes = {
+
 }
 
 const createRouter = () => new Router({
