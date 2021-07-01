@@ -56,3 +56,6 @@ export function resetRouter() {
 }
 
 export default router
+
+// mode: 'hash', 默认使用“hash”,所以设置与否浏览器的URL显示像这样(http://localhost:8000/#/firsts/first ),
+// mode: 'history'，浏览器URL显示为(http://localhost:8000/firsts/first),设置“history”后链接中没有#

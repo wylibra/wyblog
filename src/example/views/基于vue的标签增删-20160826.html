@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+	<title>标签</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+	body{font-size: 15px; }
+	.main{width:400px;padding:20px; border:1px solid #ccc;}
+	.main-box{margin-bottom: 10px;}
+	.edit-btn{color:#d00; border:1px solid #d00; padding:3px 5px; border-radius: 2px; cursor: pointer;}
+	.edit-btn:hover{color:#fff; background-color: #d00;}
+	.show-span{margin-top: 5px;margin-bottom: 5px; display: inline-block;padding: 5px 10px;margin-right: 10px;background-color: #fff1dc;color: #f40;}
+	.remove-tags{color:#d00; cursor: pointer;}
+	.remove-icon{width: 18px;height: 18px;line-height: 16px;text-align: center;margin-left: 5px;cursor: pointer;color: #999;display: inline-block;box-sizing: border-box;border: 1px solid transparent;}
+	.remove-icon:hover{border: 1px solid #999;border-radius: 9px;}
+	</style>
+</head>
+<body id="main">
+	<div class="main" v-cloak>
+		<!-- 编辑按钮 -->
+		<div class="main-box">
+			<div v-show="!editOption.editable">
+				<span class="edit-btn" @click="openEdit">添加</span>
+			</div>
+			<div v-show="editOption.editable">
+ 				<span class="edit-btn" @click="cancelEdit">取消</span>
+ 				<span class="edit-btn" @click="submitData">完成</span>
+			</div>
+		</div>
+		<!-- 正常模式 -->
+		<div class="main-box" v-show="!editOption.editable">
+			<span class="show-span" v-for="item in tagData">{{item}}</span>
+		</div>
+		<!-- 编辑模式 -->
+		<div class="main-box" v-show="editOption.editable">
+			<div>
+				<input type="text" class="" v-model="addedTag" @keyup.enter="addTags">
+				<span class="remove-tags" @click="removeflag=!removeflag">{{removeflag?'取消删除':'删除'}}</span>
+			</div>
+			<div>
+				<span class="show-span" v-for="item in tagData" track-by="$index" @click="removeBtn($index)">{{item}}<span class="remove-icon" v-show="removeflag">x</span></span>
+				<textarea v-model="realData" style="height:60px;width:300px;display:block;"></textarea>
+			</div>
+		</div>
+	</div>
+	<!-- <div>
+		<span v-for="n in 10">{{n}}</span>
+	</div>
+	<div>
+		<button @click="order =order * -1">排序</button>
+		<ul>
+			<li v-for="user in users |orderBy 'name' order">{{user.name}}</li>
+		</ul>
+	</div> -->
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/vue.js"></script>
+<script>
+	$(function(){
+		var vm =new Vue({
+			el:"#main",
+			data:{
+				editOption: {
+					editable :false
+				},
+				removeflag: false,
+				realData:'标签1|标签2|||标签3|标签4',
+				tagData: [],
+				addedTag: '',
+				order: 1,
+				users: [ { name: 'ceshi'},{ name: 'biwuli'},{ name: 'wangyu'},{ name: 'zuahua'} ]
+			},
+			methods: {
+				init: function(){
+					var self = this.$data;
+					var that =this;
+					that.getData();
+				},
+				openEdit: function(){
+					this.editOption.editable = true;
+				},
+				submitData: function(){
+					var self = this.$data;
+					var that = this;
+					self.editOption.editable = false;
+					var arr=self.realData.split("|");
+					var newArr=[];
+					for( var i=0; i<arr.length;i++){
+						if(arr[i]){
+							var flag =1;
+							for(var j=0; j<newArr.length;j++){
+								if(arr[i] ==newArr[j]){
+									flag =0;
+									break;
+								}
+							}
+							if(flag){
+								newArr.push(arr[i]);
+							}
+						}
+					}
+					self.realData = newArr.join("|");
+				},
+				cancelEdit: function(){
+					var self = this.$data;
+					var that = this;
+					self.editOption.editable = false;
+				},
+				addTags: function(){
+					var self = this.$data;
+	                var that = this;
+                    self.addedTag = $.trim(self.addedTag);
+                    var arrStatic = self.tagData;
+                    var tagStatic = self.addedTag;
+                    if(tagStatic){
+                        for (var i = arrStatic.length - 1; i >= 0; i--) {
+                            if(arrStatic[i] == tagStatic){
+                                alert('该标签已存在');
+                                return;
+                            }
+                        };
+                        self.tagData.push(self.addedTag);
+                        self.addedTag = '';
+                    }
+				},
+				removeBtn: function(index){
+					var self = this.$data;
+					if(self.removeflag){
+						self.tagData.splice(index,1);
+					}
+				},
+				getData: function(){
+					var self = this.$data;
+					var that = this;
+					// 显示正确数据之前的校验
+					var arr=self.realData.split("|");
+					var newArr=[];
+					for( var i=0; i<arr.length;i++){
+						if(arr[i]){
+							var flag =1;
+							for(var j=0; j<newArr.length;j++){
+								if(arr[i] ==newArr[j]){
+									flag =0;
+									break;
+								}
+							}
+							if(flag){
+								newArr.push(arr[i]);
+							}
+						}
+					}
+					self.realData = newArr.join("|");
+					self.tagData =newArr;
+				}
+			},
+			watch: {
+				'tagData' :function(newVal,oldVal){
+					var self = this.$data;
+	                var that = this;
+	                if(newVal && newVal.length > 0){
+	                    self.realData = newVal.join('|');
+	                }
+	                else{
+	                    self.realData ='';
+	                }
+				},
+				'realData' :function(newVal,oldVal){
+					var self=this.$data;
+					var that= this;
+					if(newVal){
+						self.tagData =newVal.split(/、|，|｜|\\|,|\|/);
+					}else{
+						self.tagData=[];
+					}
+				}
+			},
+			compiled: function() {
+        this.init();
+			}
+		})
+	})
+</script>
+</body>
+</html>

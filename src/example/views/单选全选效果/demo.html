@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单选/全选</title>
+    <style>
+        .ico{
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            background: url(icon.png) no-repeat;
+        }
+        .icon-check{
+            width: 18px;
+            height: 18px;
+            background-position: -558px -114px;
+        }
+        .icon-checked {
+            width: 18px;
+            height: 18px;
+            background-position: -522px -114px;
+        }
+        .icon-check, .icon-checked {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="main-cont">
+    <span>单选</span>
+    <div>
+        <span class="aCheckBtn ico icon-check"></span>
+        <span class="aCheckBtn ico icon-check"></span>
+        <span class="aCheckBtn ico icon-check"></span>
+        <span class="aCheckBtn ico icon-check"></span>
+    </div>
+    <span>全选</span>
+    <div class="checkall">
+        <i class="ico icon-check"></i>
+    </div>
+</div>
+<script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
+<script>
+    $(function () {
+        //底部的全选
+        $('.checkall').on('click', function() {
+            if ($(this).find('i').hasClass('icon-check')) {
+                $(this).find('i').removeClass('icon-check').addClass('icon-checked');
+                $('.aCheckBtn').removeClass('icon-check').addClass('icon-checked');
+            } else {
+                $(this).find('i').removeClass('icon-checked').addClass('icon-check');
+                $('.aCheckBtn').removeClass('icon-checked').addClass('icon-check');
+            }
+        });
+
+        //一个一个的单选
+        $('.main-cont').on('click', '.aCheckBtn', function() {
+            if ($(this).hasClass('icon-check')) {
+                $(this).removeClass('icon-check').addClass('icon-checked');
+                if(!$('.aCheckBtn').hasClass('icon-check')){
+                    $('.checkall i').removeClass('icon-check').addClass('icon-checked');
+                }
+            } else {
+                $(this).removeClass('icon-checked').addClass('icon-check');
+                $('.checkall i').removeClass('icon-checked').addClass('icon-check');
+            }
+        });
+    });
+</script>
+</body>
+</html>

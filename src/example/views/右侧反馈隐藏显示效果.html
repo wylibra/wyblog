@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+	    .bigbox{
+    	    position: fixed;
+		    height: 0;
+		    bottom: 300px;
+		    right: -152px;
+		    color: #fff;
+		    transition: 0.5s all linear;
+	    }
+	    .bigbox:hover{
+			right: 0px;
+		}
+		.feedback{
+		    width: 32px;
+		    background-color: #d00;
+		    border-radius: 7px 0px 0px 7px;
+		    float: left;
+		    padding: 10px 0px;
+		}
+		.feedback span{
+		    display: block;
+            margin: 13px 6px;
+            text-align: center;
+		}
+		span .icon{
+			font-size: 12px;
+		}
+		.feedbackCon{
+			width: 150px;
+		    height: 190px;
+		    border: 1px solid #ccc;
+		    float: left;
+		}
+
+	</style>
+</head>
+<body>
+<div class="bigbox">
+	<!-- 开始显示缩略 -->
+	<div class="feedback">
+		<span>反</span><span>馈</span><span class="icon">&lt;</span>
+	</div>
+	<div class="feedbackCon"></div>
+</div>
+</body>
+</html>

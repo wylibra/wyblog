@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>index的使用</title>
+</head>
+<body>
+
+<div id="nav"> 
+	<a href="javascript:;">建站素材</a> 
+	<a href="javascript:;">jquery特效</a> 
+	<a href="javascript:;">懒人主机</a> 
+	<a href="javascript:;">前端路上</a> 
+</div> 
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	$("#nav a").on("click",function(){ 
+		//四个经典的用法 
+//		 var index1 = $("#nav a").index(this);
+		// var index1 = $("#nav a").index($(this)); 
+		var index1 = $(this).index()
+		// var index1 = $(this).index("a") 
+		alert(index1); 
+		return false; 
+	}); 
+</script>
+</body>
+</html>

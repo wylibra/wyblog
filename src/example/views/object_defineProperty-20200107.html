@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body id="app">
+	<div>
+		<span></span>
+		<span @click="bindDataHandler">修改</span>
+	</div>
+	<script src="../js/jquery-1.11.3.min.js"></script>
+	<script src="../js/vue.js"></script>
+	<script>
+		$(function(){
+			var vm = new Vue({
+				el:"#app",
+				data:{
+				},
+				mounted() {
+					this.bindDataHandler();
+				},
+				methods: {
+					bindDataHandler() {
+						var person = {
+							name: 'wy',
+							age: 18
+						}
+						// Todo
+						Object.defineProperty(person, 'name', {
+							get: function () {
+								console.log(`获取 触发函数`);  // 每次获取的时候都会触发这个函数
+								return this.name;
+							},
+							set: function (newValue) {
+								console.log('修改值 触发函数');
+								this.name = newValue;
+							}
+						});
+						// 读取person.name
+						console.log(person.name);
+						console.log(person.age);
+						// 修改person.name
+						person.name = 'wyy';
+						person.age = 16;
+						console.log(person.name);
+						console.log(person.age);
+					}
+				},
+			});
+		})
+	</script>
+</body>
+</html>
+
+<!-- 
+  Vue的双向数据绑定的原理: Object.defineProperty()
+  
+ -->

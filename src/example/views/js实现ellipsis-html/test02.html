@@ -1,0 +1,89 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#test {
+			background-color: #eee;
+			width: 300px;
+			font-size: 16px;
+			line-height: 35px;
+		}
+
+		#test2 {
+			background-color: #ccc;
+			width: 200px;
+			font-size: 18px;
+			line-height: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="test"></div>
+	<div id="test2"></div>
+</body>
+<script type="text/javascript">
+	var getEllipsisHtml = (function () {
+		var element = document.createElement("div");
+		document.body.appendChild(element);
+		element.style.position = 'absolute';
+		element.style.left = '-10000';
+		element.style['word-break']= 'break-all';
+
+		return function (param) {
+			var lineH = '';
+			if(param.style) {
+				for(var i in param.style) {
+					element.style[i] = param.style[i];
+				}
+				lineH = param.style['line-height']&& param.style['line-height'].split('px')[0];
+			}
+			var lineNum = param.lineNum || 1;
+			var textLen = param.text.length;
+
+			for(var i = 1; i < textLen + 1; i++) {
+				element.innerHTML = param.text.substring(0,i) + (param.placeholder || '...');
+				var eleHeight = element.offsetHeight;
+				if (eleHeight > lineH * lineNum) {
+					element.innerHTML = param.text;
+					if (element.offsetHeight > lineH * lineNum) {
+						element.innerHTML = param.text.substring(0,i-1) + (param.placeholder || '...');
+					} else {
+						element.innerHTML = param.text;
+					}
+					break;
+				}
+				element.innerHTML = param.text;
+			}
+			// element.style.lineHeight = 'normal';
+			return element.innerHTML;
+		}
+	})();
+
+	var param = {
+		text: '万瑟试万瑟试ded edw sfsf fsd cee wee sdde ww eee  d 第十三的是 dd sds element',
+		placeholder: '时代的点点滴滴',
+		style: {
+			'line-height': '35px',
+			'width': '300px',
+			'font-size': '16px'
+		},
+		lineNum: 2
+	}
+	var test = document.getElementById('test');
+	test.innerHTML = getEllipsisHtml(param);
+
+	var param2 = {
+		text: '吃大餐持续性的沙形成的的的的发舒服大方发万d',
+		placeholder: '***',
+		style: {
+			'line-height': '20px',
+			'width': '200px',
+			'font-size': '18px'
+		},
+		lineNum: 2
+	}
+	var test2 = document.getElementById('test2');
+	test2.innerHTML = getEllipsisHtml(param2);
+
+</script>
+</html>

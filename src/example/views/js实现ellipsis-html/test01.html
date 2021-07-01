@@ -1,0 +1,124 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.default {
+			word-break: break-all;
+			background-color: #eee;
+		}
+/*		div, .box, #box {
+			width: 200px;
+			background-color: #ccc;
+			line-height: 20px;
+			font-size: 16px;
+			word-break: break-all;
+			margin-bottom: 10px;
+			display: none;
+		}*/
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script type="text/javascript">
+	// var ele = document.getElementById('box');
+	// var htmlVal = ele.innerHTML;
+	// setContent(ele, 20*2);
+	// function setContent(ele, val) {
+	// 	var htmlLen = ele.innerHTML.length;
+	// 	for(var i = 1; i < htmlLen + 1; i++) {
+	// 		ele.innerHTML = ele.innerHTML.substring(0,i) + '......';
+	// 		var eleHeight = ele.offsetHeight;
+	// 		if (eleHeight > val) {
+	// 			ele.innerHTML = htmlVal;
+	// 			if (ele.offsetHeight > val) {
+	// 				ele.innerHTML = ele.innerHTML.substring(0,i-1) + '......';
+	// 			} else {
+	// 				ele.innerHTML = htmlVal;
+	// 			}
+	// 			return;
+	// 		}
+	// 		ele.innerHTML = htmlVal;
+	// 		ele.style.display = 'block';
+	// 	}
+	// }
+
+	// function getEllipsisHtml(ele, val, con) {
+	// 	var htmlLen = con.length;
+	// 	for(var i = 1; i < htmlLen + 1; i++) {
+	// 		ele.innerHTML = con.substring(0,i) + '......';
+	// 		var eleHeight = ele.offsetHeight;
+	// 		if (eleHeight > val) {
+	// 			ele.innerHTML = con;
+	// 			if (ele.offsetHeight > val) {
+	// 				ele.innerHTML = con.substring(0,i-1) + '......';
+	// 			} else {
+	// 				ele.innerHTML = con;
+	// 			}
+	// 			return;
+	// 		}
+	// 		ele.innerHTML = con;
+	// 		ele.style.display = 'block';
+	// 	}
+	// }
+	// var ele1 = document.getElementById('box');
+	// getEllipsisHtml(ele1, 40, 'de ces sdfsd dsfsd fsgdge de的点滴滴但点ddsfs');
+
+	// var ele2 = document.createElement("div");
+	// document.body.appendChild(ele2);
+	// getEllipsisHtml(ele2, 40, 'de ces sdfsd dsfsd fsgdce dd ff sda sdjfs;ddd dfsdf df');
+
+
+
+
+
+	var param = {
+		text: 'de ces sdfsd dsfsd fsgdce dd ff sda sdjfs;ddd dfsdf df',
+		placeholder: '...',
+		classname: 'box',
+		style: {
+			'width': '300px',
+			'line-height': '30px',
+			'font-size': '16px'
+		},
+		lineNum: 2
+	}
+
+	var getEllipsisHtml = (function (param) {
+		var element = document.createElement("div");
+		element.style.display = 'none';
+		element.classList.add('default');
+		if(param.classname) {
+			element.classList.add(param.classname);
+		}
+		if(param.style) {
+			for(var i in param.style) {
+				element.style[i] = param.style[i];
+			}
+		}
+		var lineH = param.style && param.style['line-height']&& param.style['line-height'].split('px')[0] || 20;
+		var lineNum = param.lineNum || 1;
+		document.body.appendChild(element);
+		return function (param) {
+			var textLen = param.text.length;
+			for(var i = 1; i < textLen + 1; i++) {
+				element.innerHTML = param.text.substring(0,i) + param.placeholder;
+				var eleHeight = element.offsetHeight;
+				if (eleHeight > lineH * lineNum) {
+					element.innerHTML = param.text;
+					if (element.offsetHeight > lineH * lineNum) {
+						element.innerHTML = param.text.substring(0,i-1) + param.placeholder;
+					} else {
+						element.innerHTML = param.text;
+					}
+					return;
+				}
+				element.innerHTML = param.text;
+				element.style.display = 'block';
+			}
+		}
+	})(param);
+
+	getEllipsisHtml(param);
+</script>
+</html>

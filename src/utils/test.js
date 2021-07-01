@@ -1,3 +1,5 @@
+// 面试
+
 /**
  * 传入数据、操作函数
  */
@@ -16,11 +18,16 @@ function groupBy(arr, fn) {
   console.log(obj);
 }
 
-
 /**
- * 闭包应用
+ * 闭包应用，实现once函数
  */
 const test = () => { console.log(1) }
+const func = once(test)
+
+func(); // 输出1
+func(); // 无输出
+func(); // 无输出
+
 function once(fn) {
   let flag = true
   return function () {
@@ -30,10 +37,3 @@ function once(fn) {
     };
   }
 }
-const func = once(test)
-
-func(); // 输出1
-func(); // 无输出
-func(); // 无输出
-
-
